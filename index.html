@@ -657,13 +657,20 @@ body.kpopen #kbdone{display:none}body:not(.kpopen) #kbdel{display:none}
 :root:is([data-theme=vice],[data-theme=hud]) .hero .mkchip{background:#fff;border:1.5px solid currentColor;font-weight:800}
 .sfx-vice{background:radial-gradient(ellipse at center,rgba(255,255,255,0) 20%,rgba(42,18,64,.5) 100%),rgba(42,18,64,.22)}
 :root[data-theme=vice] .hpg.hmk>*{position:relative}:root[data-theme=vice] #btcP,:root[data-theme=vice] .hmk .st span{color:#2A1240;font-weight:800}:root[data-theme=vice] .hmk .st b{opacity:1;color:#4A2A6B}:root[data-theme=vice] #btcT{color:#4A2A6B}:root[data-theme=vice] .hmk .stkn{color:#4A2A6B;opacity:1}
+
+/* ===== v2.6.0: saran deskripsi melayang + tombol gembok (PC) ===== */
+.nw{position:relative}
+.sug{position:absolute;left:0;right:0;top:calc(100% - 6px);margin:0;z-index:8;background:var(--card);box-shadow:0 12px 28px rgba(0,0,0,.22)}
+.lkb{display:none;width:40px;height:40px;border-radius:13px;border:0;background:var(--card);color:var(--mute);place-items:center;box-shadow:var(--sh);transition:color .3s,transform .2s;flex:none}
+.lkb:active{transform:scale(.92)}.lkb svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media (hover:hover) and (pointer:fine){.lkb.on{display:grid}.lkb:hover{color:var(--acc)}}
 </style>
 </head>
 <body>
 <div id="fx" aria-hidden="true"></div>
 <div id="app">
  <section class="view on" id="v-home">
-  <div class="brand"><svg class="bdi" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3 7 9l5 12M15 3l2 6-5 12" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1"/></svg>MoneyTor<em>v2.5.2</em><span class="sylab" id="sylab"></span><button class="syb off" id="syb" type="button" aria-label="Status sinkron"></button></div><h1 id="hi">Halo 👋</h1>
+  <div class="brand"><svg class="bdi" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3 7 9l5 12M15 3l2 6-5 12" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1"/></svg>MoneyTor<em>v2.6.0</em><span class="sylab" id="sylab"></span><button class="syb off" id="syb" type="button" aria-label="Status sinkron"></button><button class="lkb" id="lkb" type="button" aria-label="Kunci sekarang" title="Kunci sekarang"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button></div><h1 id="hi">Halo 👋</h1>
   <div class="hero" id="hero"><div class="hsc" id="hsc"><div class="hpg"><button class="hb" id="eye" aria-label="Sembunyikan total saldo"></button><div class="hd" id="hdt"></div><small class="sl">Total Saldo</small><div class="big" id="bal">Rp 0</div>
    <div class="duo" id="duo"><div id="boxIn"><small><i class="ar in">↑</i>Pemasukan bulan ini</small><b id="mi">Rp 0</b></div><div id="boxOut"><small><i class="ar out">↓</i>Pengeluaran bulan ini</small><b id="mo">Rp 0</b></div></div><div class="hd" id="hd"></div></div><div class="hpg hmk" id="btcCard" role="button" tabindex="0" aria-label="Perbarui harga pasar"><div class="mkh"><small>Harga pasar</small><small id="mkTm"></small></div><div class="mkc"><span class="bi">₿</span><span class="bm"><small id="btcS">Bitcoin · via CoinGecko</small><b id="btcP">Rp –</b></span></div><div class="bu"><span id="btcT"></span><em class="mkchip" id="btcC"></em></div><div class="stk" id="stkRow"></div></div></div><div class="hdots" id="hdots"><i class="on"></i><i></i></div></div>
   <div class="tgt" id="tgtCard" style="display:none"><div class="tgh2"><span id="tgtL"></span><b id="tgtP"></b></div><div class="tbar"><i id="tgtF"></i></div><div class="tgs" id="tgtT"></div></div>
@@ -808,8 +815,8 @@ body.kpopen #kbdone{display:none}body:not(.kpopen) #kbdel{display:none}
  <div class="hint" id="real" style="text-align:left;margin:0"></div>
  <div class="prev"><span>Sisa saldo setelah ini</span><b id="p1">Rp 0</b></div>
  <label class="l">Deskripsi</label>
- <input class="f" id="note" placeholder="Catatan (opsional)" autocomplete="off" enterkeyhint="done">
- <div class="sug" id="sug"></div>
+ <div class="nw"><input class="f" id="note" placeholder="Catatan (opsional)" autocomplete="off" enterkeyhint="done">
+ <div class="sug" id="sug"></div></div>
  <label class="l">Tanggal</label>
  <button class="dsel" id="dsel" type="button"><span id="dtxt"></span><i style="font-style:normal">📅</i></button>
  <input type="hidden" id="date">
@@ -1534,11 +1541,17 @@ $('#tgP').onclick=()=>{if(!S.pinOn)showPin('new','Buat PIN baru');else showPin('
 $('#chgPin').onclick=()=>{if(S.pinOn)showPin('verify','Masukkan PIN lama',()=>setTimeout(()=>showPin('new','Buat PIN baru'),380))};
 function isHP(){return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Mac/.test(navigator.platform))||(matchMedia('(pointer:coarse)').matches&&matchMedia('(hover:none)').matches)}
 function pinActive(){return !!(S.pinOn&&S.pin)&&(!S.pinDev||S.pinDev=='all'||(S.pinDev=='hp')==isHP())}
-function pinDevUI(){const v=S.pinDev||'all',w=$('#pinDevW');if(!w)return;$$('#pinDev .chip').forEach(b=>b.classList.toggle('on',b.dataset.v==v));w.style.opacity=S.pinOn?1:.45;w.style.pointerEvents=S.pinOn?'':'none'}
+function pinDevUI(){lockUI();const v=S.pinDev||'all',w=$('#pinDevW');if(!w)return;$$('#pinDev .chip').forEach(b=>b.classList.toggle('on',b.dataset.v==v));w.style.opacity=S.pinOn?1:.45;w.style.pointerEvents=S.pinOn?'':'none'}
 $('#pinDev').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;S.pinDev=b.dataset.v;save();pinDevUI();toast('🔒','PIN berlaku di '+({all:'semua perangkat',hp:'HP saja',pc:'laptop saja'})[b.dataset.v],'')});
 function pinReset(){pinBuf='';showPin('new','Buat PIN baru')}
 $('#pinx').onclick=()=>{if(pinMode!='lock')return hidePin();openLogin('pin')};
-document.addEventListener('visibilitychange',()=>{if(document.hidden)hidAt=Date.now();else if(pinActive()&&!pinOpen&&Date.now()-hidAt>20000)showPin('lock','Masukkan PIN')});
+const LOCK_MS=5*60*1000;let lastAct=Date.now();
+['pointerdown','keydown','touchstart','wheel','scroll','mousemove'].forEach(ev=>addEventListener(ev,()=>{lastAct=Date.now()},{passive:true,capture:true}));
+function idleCheck(){if(pinActive()&&!pinOpen&&Date.now()-lastAct>LOCK_MS)showPin('lock','Masukkan PIN')}
+function lockUI(){const b=$('#lkb');if(b)b.classList.toggle('on',pinActive())}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)idleCheck()});
+setInterval(()=>{idleCheck();lockUI()},15000);
+$('#lkb').addEventListener('click',()=>{if(pinActive()&&!pinOpen)showPin('lock','Masukkan PIN')});
 
 function balR(){const el=$('#bal');if(S.hb){el.textContent='Rp ******';el.dataset.v=0}else count(el,bal());eyeUI();hdFill()}
 function alertR(){const c=$('#tgtCard'),n=new Date(),T=tgtFor(n.getFullYear(),n.getMonth());if(T<=0){c.style.display='none';return}c.style.display='';
