@@ -664,13 +664,17 @@ body.kpopen #kbdone{display:none}body:not(.kpopen) #kbdel{display:none}
 .lkb{display:none;width:40px;height:40px;border-radius:13px;border:0;background:var(--card);color:var(--mute);place-items:center;box-shadow:var(--sh);transition:color .3s,transform .2s;flex:none}
 .lkb:active{transform:scale(.92)}.lkb svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 @media (hover:hover) and (pointer:fine){.lkb.on{display:grid}.lkb:hover{color:var(--acc)}}
+
+/* ===== v2.7.0: wajib login (latar dashboard di-blur) ===== */
+.dlg.req{background:rgba(20,16,40,.42);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+#loginPop.req #lgNo{display:none}#loginPop.req .da{display:flex}#loginPop.req #lgGo{flex:1}
 </style>
 </head>
 <body>
 <div id="fx" aria-hidden="true"></div>
 <div id="app">
  <section class="view on" id="v-home">
-  <div class="brand"><svg class="bdi" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3 7 9l5 12M15 3l2 6-5 12" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1"/></svg>MoneyTor<em>v2.6.0</em><span class="sylab" id="sylab"></span><button class="syb off" id="syb" type="button" aria-label="Status sinkron"></button><button class="lkb" id="lkb" type="button" aria-label="Kunci sekarang" title="Kunci sekarang"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button></div><h1 id="hi">Halo 👋</h1>
+  <div class="brand"><svg class="bdi" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3 7 9l5 12M15 3l2 6-5 12" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1"/></svg>MoneyTor<em>v2.7.0</em><span class="sylab" id="sylab"></span><button class="syb off" id="syb" type="button" aria-label="Status sinkron"></button><button class="lkb" id="lkb" type="button" aria-label="Kunci sekarang" title="Kunci sekarang"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button></div><h1 id="hi">Halo 👋</h1>
   <div class="hero" id="hero"><div class="hsc" id="hsc"><div class="hpg"><button class="hb" id="eye" aria-label="Sembunyikan total saldo"></button><div class="hd" id="hdt"></div><small class="sl">Total Saldo</small><div class="big" id="bal">Rp 0</div>
    <div class="duo" id="duo"><div id="boxIn"><small><i class="ar in">↑</i>Pemasukan bulan ini</small><b id="mi">Rp 0</b></div><div id="boxOut"><small><i class="ar out">↓</i>Pengeluaran bulan ini</small><b id="mo">Rp 0</b></div></div><div class="hd" id="hd"></div></div><div class="hpg hmk" id="btcCard" role="button" tabindex="0" aria-label="Perbarui harga pasar"><div class="mkh"><small>Harga pasar</small><small id="mkTm"></small></div><div class="mkc"><span class="bi">₿</span><span class="bm"><small id="btcS">Bitcoin · via CoinGecko</small><b id="btcP">Rp –</b></span></div><div class="bu"><span id="btcT"></span><em class="mkchip" id="btcC"></em></div><div class="stk" id="stkRow"></div></div></div><div class="hdots" id="hdots"><i class="on"></i><i></i></div></div>
   <div class="tgt" id="tgtCard" style="display:none"><div class="tgh2"><span id="tgtL"></span><b id="tgtP"></b></div><div class="tbar"><i id="tgtF"></i></div><div class="tgs" id="tgtT"></div></div>
@@ -856,6 +860,7 @@ body.kpopen #kbdone{display:none}body:not(.kpopen) #kbdel{display:none}
 <div class="toast" id="toast"><div class="e" id="te">⏰</div><div><b id="tb"></b><span id="ts"></span></div></div>
 
 <script>
+const REQUIRE_LOGIN=true;
 function errBar(e){try{console.error(e);let d=document.getElementById('errbar');if(!d){d=document.createElement('div');d.id='errbar';d.style.cssText='position:fixed;left:8px;right:8px;top:8px;z-index:99999;background:#7f1d1d;color:#fff;font:12px/1.4 system-ui,sans-serif;padding:10px 12px;border-radius:10px;word-break:break-word';d.onclick=()=>d.remove();document.body.appendChild(d)}d.textContent='Error: '+((e&&e.message)||e)+' (ketuk untuk menutup)'}catch(_){}}
 addEventListener('error',ev=>errBar(ev.error||ev.message));
 const TGLF=new Intl.DateTimeFormat('id-ID',{day:'numeric',month:'short'}),tglC=new Map();const tgl=d=>{let r=tglC.get(d);if(r===undefined){r=TGLF.format(new Date(d+'T00:00'));tglC.set(d,r)}return r};
@@ -1287,7 +1292,8 @@ const kpStop=()=>{kpHide();clearTimeout(kpT);clearInterval(kpI);$$('#kp button.k
 const kpDel=e=>{e.preventDefault();const b=$('#kbdel');b.dataset.t=Date.now();b.classList.add('kdn');kpPress('b');clearTimeout(kpT);clearInterval(kpI);kpT=setTimeout(()=>{kpI=setInterval(()=>kpPress('b'),70)},420)};
 $('#kbdel').addEventListener('pointerdown',kpDel);['pointerup','pointercancel','pointerleave'].forEach(ev=>$('#kbdel').addEventListener(ev,kpStop));$('#kbdel').addEventListener('contextmenu',e=>e.preventDefault());
 $('#kp').addEventListener('pointerdown',e=>{const b=e.target.closest('button');if(!b)return;e.preventDefault();b.dataset.t=Date.now();b.classList.add('kdn');if(b.dataset.k=='enter')return;kpShow(b);kpPress(b.dataset.k)});
-$('#kp').addEventListener('click',e=>{if(e.target.closest('button[data-k=enter]')){kpClose();if(($('#note').value||'').trim()){[120,420,800].forEach(t=>setTimeout(sheetBottom,t))}else $('#note').focus()}});
+function focusNote(){const n=$('#note');n.focus();const l=n.value.length;try{n.setSelectionRange(l,l)}catch(_){}}
+$('#kp').addEventListener('click',e=>{if(e.target.closest('button[data-k=enter]')){kpClose();focusNote()}});
 ['pointerup','pointercancel','pointerleave'].forEach(ev=>$('#kp').addEventListener(ev,kpStop));
 $('#kp').addEventListener('contextmenu',e=>e.preventDefault());
 $('.amt').addEventListener('click',kpOpen);
@@ -1407,11 +1413,11 @@ function inView(el){const sh=el.closest('.sheet');if(!sh)return;const bar=sh.id=
 let ivT;function noteTop(){const sh=$('#sheet'),n=$('#note'),sp=$('#kbsp'),am=$('.amt');if(!sh||!n||!sp||!am||document.activeElement!==n)return;sp.style.height='0px';const shT=sh.getBoundingClientRect().top,A=am.getBoundingClientRect().top-shT+sh.scrollTop,T=n.getBoundingClientRect().top-shT+sh.scrollTop,want=Math.max(0,T-A),need=Math.max(0,want+sh.clientHeight-sh.scrollHeight);sp.style.height=need+'px';sh.scrollTo({top:want,behavior:'smooth'})}
 function sheetBottom(){const sh=$('#sheet'),sp=$('#kbsp');if(!sh)return;if(sp)sp.style.height='0px';sh.scrollTo({top:sh.scrollHeight,behavior:'smooth'})}
 const noteDone=()=>{const n=$('#note');n.blur();[120,420,800].forEach(t=>setTimeout(sheetBottom,t))};
-$('#note').addEventListener('keydown',e=>{if(e.key=='Enter'){e.preventDefault();e.stopPropagation();noteDone()}});
+$('#note').addEventListener('keydown',e=>{if(e.key=='Enter'&&isHP()){e.preventDefault();e.stopPropagation();noteDone()}});
 const focusIn=()=>{const a=document.activeElement;if(!a||!a.closest||!a.closest('.sheet')||!/^(INPUT|TEXTAREA)$/.test(a.tagName))return;clearTimeout(ivT);ivT=setTimeout(()=>{if(a.id=='note')noteTop();else inView(a.id=='amt'?$('#real'):a)},160)};
 if(window.visualViewport){const vv=visualViewport,f=()=>{const k=Math.max(0,innerHeight-vv.height-vv.offsetTop);$$('.sheet').forEach(x=>x.style.bottom=k+'px');document.documentElement.style.setProperty('--vvh',vv.height+'px');document.body.classList.toggle('kbopen',k>80);if(k<=80){const sp=$('#kbsp');if(sp)sp.style.height='0px'}focusIn()};vv.addEventListener('resize',f);vv.addEventListener('scroll',f)}
 document.addEventListener('focusin',()=>setTimeout(focusIn,320));
-$('#xclose').onclick=close;$('#kbdone').onclick=()=>{const kp=document.body.classList.contains('kpopen');kpClose();if(kp){if(($('#note').value||'').trim()){[120,420,800].forEach(t=>setTimeout(sheetBottom,t))}else $('#note').focus();return}if(document.activeElement&&document.activeElement.id=='note'){noteDone();return}if(document.activeElement)document.activeElement.blur()};
+$('#xclose').onclick=close;$('#kbdone').onclick=()=>{const kp=document.body.classList.contains('kpopen');kpClose();if(kp){focusNote();return}if(document.activeElement&&document.activeElement.id=='note'){noteDone();return}if(document.activeElement)document.activeElement.blur()};
 $$('input').forEach(i=>i.addEventListener('blur',()=>setTimeout(()=>{if(!document.activeElement||document.activeElement==document.body)scrollTo(0,0)},80)));
 
 let pieEnt=[],pieTot=0,pieSel=-1,pieDrill=false;
@@ -1619,7 +1625,7 @@ async function getTok(){if(fbTok&&Date.now()<fbExp-60000)return fbTok;if(!S.sync
  if(!r.ok)throw new Error(j.error&&j.error.message||'AUTH');fbTok=j.id_token;fbExp=Date.now()+(+j.expires_in)*1000;S.sync.rt=j.refresh_token;S.sync.uid=j.user_id;store();return fbTok}
 function syncSoon(){if(S.sync&&S.sync.rt&&!S.pend){S.pend=true;syb()}}
 const setSt=m=>{syMsg=m||'';syUI()};
-function syUI(){syb();if(typeof lkSy=='function')lkSy();const on=!!(S.sync&&S.sync.rt),i=$('#syInfo');if(!i)return;
+function syUI(){syb();loginGate();if(typeof lkSy=='function')lkSy();const on=!!(S.sync&&S.sync.rt),i=$('#syInfo');if(!i)return;
  i.innerHTML=on?`Masuk sebagai <b>${esc(S.sync.email||'')}</b><br><span style="color:var(--mute);font-size:12.5px">${esc(syMsg)||(S.sync.at?'Terakhir sinkron '+fd(new Date(S.sync.at).toISOString()):'Belum pernah sinkron')+' · otomatis tiap 1 jam'}</span>`:`Belum masuk. Data hanya ada di perangkat ini.<br><span style="color:var(--mute);font-size:12.5px">${esc(syMsg)||'Masuk untuk menyamakan data antar perangkat.'}</span>`;
  $('#syLogin').style.display=on?'none':'';$('#syNow').style.display=on?'':'none';$('#syOut').style.display=on?'':'none'}
 async function doSync(manual){if(manual)mktFetch();if(!S.sync||!S.sync.rt)return;if(syncing){syncAgain=true;return}syncing=true;if(manual)setSt('Menyinkronkan…');else syUI();
@@ -1658,17 +1664,18 @@ const SYI={off:'<svg viewBox="0 0 24 24"><path d="M6.5 18h10.2a4 4 0 0 0 .6-7.96
 function syb(){const b=$('#syb');if(!b)return;const on=!!(S.sync&&S.sync.rt),k=!on?'off':syncing?'busy':(syMsg&&!/^Menyinkronkan/.test(syMsg))?'err':S.pend?'pend':'ok';
  b.className='syb '+k;b.innerHTML=SYI[k];const lb=$('#sylab');if(lb)lb.textContent=k=='off'?'Belum masuk':k=='busy'?'Menyinkronkan…':k=='err'?'Gagal sinkron':k=='pend'?'Belum tersinkron':'Tersinkron'+(S.sync&&S.sync.at?' '+new Date(S.sync.at).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}).replace('.',':'):'');b.title=k=='off'?'Belum masuk. Ketuk untuk masuk':k=='busy'?'Menyinkronkan…':k=='err'?syMsg:k=='pend'?'Ada perubahan yang belum tersinkron. Ketuk untuk sinkron sekarang':'Tersinkron. Ketuk untuk sinkron sekarang'}
 let loginMode='';
+function loginGate(){try{if(!REQUIRE_LOGIN||(S.sync&&S.sync.rt)||loginMode)return;const p=$('#loginPop');if(!p||p.classList.contains('on'))return;$('#lgTitle').textContent='Masuk ke MoneyTor';$('#lgDesc').textContent='Masuk dengan akun sinkronmu untuk mulai menggunakan aplikasi. Datamu aman dan tersinkron di semua perangkat.';$('#lgGo').textContent='Masuk';$('#lgErr').textContent='';p.classList.add('on','req');setTimeout(()=>$('#lgId').focus({preventScroll:true}),350)}catch(_){}}
 function openLogin(m){loginMode=m||'';$('#lgErr').textContent='';$('#lgKey').value='';if(m=='pin')$('#lgId').value='';
  $('#lgTitle').textContent=m=='pin'?'Reset PIN':'Masuk';$('#lgDesc').textContent=m=='pin'?'Masukkan email dan password akun sinkron Firebase-mu. Kalau benar, kamu bisa membuat PIN baru. Datamu tidak dihapus.':'Pakai email dan password yang kamu buat di Firebase Authentication.';
  $('#lgGo').textContent=m=='pin'?'Lanjut':'Masuk';$('#loginPop').classList.add('on');setTimeout(()=>$('#lgId').focus({preventScroll:true}),300)}
 async function fbCheck(email,pw){const r=await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='+FB.key,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pw,returnSecureToken:true})});const j=await r.json();if(!r.ok)throw new Error(j.error&&j.error.message||'ERR');return j.localId}
 $('#syLogin').onclick=()=>openLogin('');
 $('#syb').onclick=()=>{if(!(S.sync&&S.sync.rt))return openLogin('');Promise.resolve(doSync(true)).then(()=>toast(syMsg?'⚠️':'☁️',syMsg||'Tersinkron',''))};
-$('#lgNo').onclick=()=>{loginMode='';$('#loginPop').classList.remove('on')};
-$('#loginPop').onclick=e=>{if(e.target.id=='loginPop'){loginMode='';$('#loginPop').classList.remove('on')}};
+$('#lgNo').onclick=()=>{if($('#loginPop').classList.contains('req'))return;loginMode='';$('#loginPop').classList.remove('on')};
+$('#loginPop').onclick=e=>{if(e.target.id=='loginPop'&&!$('#loginPop').classList.contains('req')){loginMode='';$('#loginPop').classList.remove('on')}};
 $('#lgGo').onclick=async()=>{const e=$('#lgId').value.trim(),p=$('#lgKey').value;if(!e||!p){$('#lgErr').textContent='Isi email dan password.';return}
  const b=$('#lgGo');b.disabled=true;$('#lgErr').textContent='Masuk…';
- try{if(loginMode=='pin'){const id=await fbCheck(e,p);const ow=S.owner||(S.sync&&S.sync.uid);if(ow&&id!==ow)throw new Error('NOTOWNER');$('#lgKey').value='';$('#loginPop').classList.remove('on');loginMode='';if(typeof pinReset=='function')pinReset()}else{await fbLogin(e,p);$('#lgKey').value='';$('#loginPop').classList.remove('on');syUI();toast('☁️','Berhasil masuk','Menyinkronkan data…');doSync(true)}}catch(x){$('#lgErr').textContent=fbMsg(x)}b.disabled=false};
+ try{if(loginMode=='pin'){const id=await fbCheck(e,p);const ow=S.owner||(S.sync&&S.sync.uid);if(ow&&id!==ow)throw new Error('NOTOWNER');$('#lgKey').value='';$('#loginPop').classList.remove('on');loginMode='';if(typeof pinReset=='function')pinReset()}else{await fbLogin(e,p);$('#lgKey').value='';$('#loginPop').classList.remove('on','req');syUI();toast('☁️','Berhasil masuk','Menyinkronkan data…');doSync(true)}}catch(x){$('#lgErr').textContent=fbMsg(x)}b.disabled=false};
 $('#lgKey').onkeydown=ev=>{if(ev.key=='Enter')$('#lgGo').click()};
 $('#syNow').onclick=()=>doSync(true);
 $('#syOut').onclick=async()=>{if(await ask('Keluar dari akun? Data di perangkat ini tetap ada, tapi tidak lagi tersinkron.\n\nMasuk dengan akun lain akan menggabungkan data ini ke akun itu.','Keluar',true)){S.sync=null;fbTok=null;store();syUI()}};
@@ -1911,7 +1918,7 @@ const lkSyClick=()=>{if(!(S.sync&&S.sync.rt))return openLogin('');Promise.resolv
 $('#lkCloud').onclick=lkSyClick;$('#lkSyBtn').onclick=lkSyClick;
 lkSy();
 lkApply();
-[()=>applyTheme(S.th),sets,home,report].forEach(f=>{try{f()}catch(e){errBar(e)}});setTimeout(tick,1200);requestAnimationFrame(moveInd);if(document.fonts)document.fonts.ready.then(moveInd);if(pinActive())showPin('lock','Masukkan PIN');
+[()=>applyTheme(S.th),sets,home,report].forEach(f=>{try{f()}catch(e){errBar(e)}});loginGate();setTimeout(tick,1200);requestAnimationFrame(moveInd);if(document.fonts)document.fonts.ready.then(moveInd);if(pinActive())showPin('lock','Masukkan PIN');
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 </script>
 </body>
