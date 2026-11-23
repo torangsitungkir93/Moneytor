@@ -689,11 +689,7 @@ html.pc #kpw,html.pc body.kpopen #sheet .kbar,html.pc body.kpopen #sheet .kp{dis
 
 /* ===== v3.0.0: popup batas, catatan berwarna, heatmap emoji, kartu geser PC ===== */
 .kx b.wr{color:#D9930D}.kx b.kn.in{color:var(--in)}.kx b.kn.out{color:var(--out)}
-<<<<<<< HEAD
 .hc{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}.hc .hd{display:block;line-height:1.1}.hc .he{display:block;font-size:8.5px;font-weight:600;line-height:1;white-space:nowrap;opacity:.9}
-=======
-.hc{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}.hc .hd{display:block;line-height:1.1}.hc .he{display:block;font-size:8px;line-height:1;letter-spacing:-1px;white-space:nowrap}
->>>>>>> 758b222fa2e66b1b71939d049c4a9b3d501e7046
 #hsc{cursor:grab}#hsc.drag{cursor:grabbing;-webkit-user-select:none;user-select:none}html.pc .hero{-webkit-user-select:none;user-select:none}#hdots{z-index:3}#hdots i{cursor:pointer;pointer-events:auto;position:relative}#hdots i::after{content:"";position:absolute;inset:-9px -6px}
 #kumPop .bars{touch-action:pan-y}
 </style>
@@ -702,11 +698,7 @@ html.pc #kpw,html.pc body.kpopen #sheet .kbar,html.pc body.kpopen #sheet .kp{dis
 <div id="fx" aria-hidden="true"></div>
 <div id="app">
  <section class="view on" id="v-home">
-<<<<<<< HEAD
   <div class="brand"><svg class="bdi" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3 7 9l5 12M15 3l2 6-5 12" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1"/></svg>MoneyTor<em>v3.0.1</em><span class="sylab" id="sylab"></span><button class="syb off" id="syb" type="button" aria-label="Status sinkron"></button><button class="lkb" id="lkb" type="button" aria-label="Kunci sekarang" title="Kunci sekarang"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button></div><h1 id="hi">Halo 👋</h1>
-=======
-  <div class="brand"><svg class="bdi" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3 7 9l5 12M15 3l2 6-5 12" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1"/></svg>MoneyTor<em>v3.0.0</em><span class="sylab" id="sylab"></span><button class="syb off" id="syb" type="button" aria-label="Status sinkron"></button><button class="lkb" id="lkb" type="button" aria-label="Kunci sekarang" title="Kunci sekarang"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button></div><h1 id="hi">Halo 👋</h1>
->>>>>>> 758b222fa2e66b1b71939d049c4a9b3d501e7046
   <div class="hero" id="hero"><div class="hsc" id="hsc"><div class="hpg"><button class="hb" id="eye" aria-label="Sembunyikan total saldo"></button><div class="hd" id="hdt"></div><small class="sl">Total Saldo</small><div class="big" id="bal">Rp 0</div>
    <div class="duo" id="duo"><div id="boxIn"><small><i class="ar in">↑</i>Pemasukan bulan ini</small><b id="mi">Rp 0</b></div><div id="boxOut"><small><i class="ar out">↓</i>Pengeluaran bulan ini</small><b id="mo">Rp 0</b></div></div><div class="hd" id="hd"></div></div><div class="hpg hmk" id="btcCard" role="button" tabindex="0" aria-label="Perbarui harga pasar"><div class="mkh"><small>Harga pasar</small><small id="mkTm"></small></div><div class="mkc"><span class="bi">₿</span><span class="bm"><small id="btcS">Bitcoin · via CoinGecko</small><b id="btcP">Rp –</b></span></div><div class="bu"><span id="btcT"></span><em class="mkchip" id="btcC"></em></div><div class="stk" id="stkRow"></div></div></div><div class="hdots" id="hdots"><i class="on"></i><i></i></div></div>
   <div class="tgt" id="tgtCard" style="display:none"><div class="tgh2"><span id="tgtL"></span><b id="tgtP"></b></div><div class="tbar"><i id="tgtF"></i></div><div class="tgs" id="tgtT"></div></div>
@@ -749,7 +741,6 @@ html.pc #kpw,html.pc body.kpopen #sheet .kbar,html.pc body.kpopen #sheet .kp{dis
   </div>
   <div class="card"><div class="lh">Grafik</div>
    <div class="set"><div>Kecualikan kategori<small id="xsum">Tidak ada</small></div><button class="btn2" id="xBtn" type="button">Pilih</button></div>
-   <div class="set"><div>Emoji di heatmap<small>Emoji kategori kecil di bawah tanggal, urut dari yang terbesar</small></div><button class="tg" id="tgHm" type="button" aria-label="Emoji di heatmap"></button></div>
    <div class="set"><div>Tombol naik/turun<small>Tombol melayang di Laporan untuk lompat ke atas atau bawah</small></div><button class="tg" id="tgFud" type="button"></button></div>
    <div class="set"><div>Harga pasar<small>Kartu harga BTC dan saham (BBCA, BMRI, BBNI, BBRI) di Beranda. Diperbarui saat sync ditekan atau kartunya diketuk</small></div><button class="tg" id="tgBtc" type="button"></button></div>
    <div class="set" style="flex-direction:column;align-items:stretch;gap:8px"><div>Sumber harga saham<small style="max-width:none">Alamat Cloudflare Worker (file worker-saham.js). Kosongkan untuk menampilkan BTC saja</small></div><input class="url" id="stkUrl" type="url" inputmode="url" placeholder="https://saham.namamu.workers.dev" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
@@ -908,11 +899,7 @@ let S={tx:[],k:true,rOn:true,rT:'14:00',last:'',bkOn:true,bkAt:'',name:'Torangto
 try{const r=localStorage.getItem('dompet.v1');if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
 if(!S.v13){S.k=false;S.v13=1}
 if(!S.cl){const mk=ty=>{const a=CATS[ty].map(c=>[(S.ce&&S.ce[ty+':'+c[1]])||c[0],c[1]]);((S.cc||{})[ty]||[]).forEach(n=>{if(!a.some(c=>c[1]==n))a.push([(S.ce&&S.ce[ty+':'+n])||'🏷️',n])});return a};S.cl={out:mk('out'),in:mk('in')}}
-<<<<<<< HEAD
 const SETK=['name','th','ct','rOn','rT','hi','ho','hb','tgt','tgm','pah','sug','cl','pinOn','pinDev','pin','favTh','autoTh','tgy','tgn','lkT','lkG','lkTh','pp','xc','fb','spOff','trOff','btcOff','trMode','stkUrl'];
-=======
-const SETK=['name','th','ct','rOn','rT','hi','ho','hb','tgt','tgm','pah','sug','cl','pinOn','pinDev','pin','favTh','autoTh','tgy','tgn','hmEmo','lkT','lkG','lkTh','pp','xc','fb','spOff','trOff','btcOff','trMode','stkUrl'];
->>>>>>> 758b222fa2e66b1b71939d049c4a9b3d501e7046
 if(!S.sh){S.sh={};S.sf={};SETK.forEach(k=>S.sh[k]=JSON.stringify(S[k]))}
 let stT;const storeNow=()=>{clearTimeout(stT);try{localStorage.setItem('dompet.v1',JSON.stringify(S))}catch(e){}};
 const store=()=>{clearTimeout(stT);stT=setTimeout(storeNow,350)};
@@ -1149,14 +1136,8 @@ function drawAlt(sel,H,data,hint){
   kc.innerHTML=cmp;kc.style.display=cmp?'':'none'}
 else{
   const hc=$(isM?'#mheat':'#yheat'),mx=Math.max(1,...vals);let h='';
-  const hmE=S.hmEmo!==false&&kind=='month',dc={};if(hmE)S.tx.forEach(t=>{if(t.type==rType&&xf(t)&&t.date.startsWith(vy+'-'+pad(vm+1)+'-')){const d=+t.date.slice(8);(dc[d]=dc[d]||{})[t.cat]=(dc[d][t.cat]||0)+t.amt}});
-  const hmEmoHtml=i=>{const o=hmE&&dc[i+1];if(!o)return '';const L=Object.entries(o).sort((a,b)=>b[1]-a[1]).map(([c])=>em(rType,c));return '<span class="he">'+L.slice(0,4).join('')+(L.length>4?'…':'')+'</span>'};
   const cell=i=>{const v=vals[i],f=i>last,p=v>0?Math.round(14+v/mx*86):0,bg=p&&!f?`background:color-mix(in srgb,var(${tc}) ${p}%,transparent);${p>55?'color:#fff;':''}`:'',cn='hc'+(f?' f':p?'':' z');
-<<<<<<< HEAD
    const inner=kind=='month'?`<span class="hd">${i+1}</span>${vals[i]>0?'<span class="he">'+short(vals[i])+'</span>':''}`:`<span>${kind=='week'?+dayAdd(ra,i).slice(8):BLN[i].slice(0,3)}</span><small>${v?short(v):'–'}</small>`,sz=kind=='month'?'aspect-ratio:1;':'height:58px;';
-=======
-   const inner=kind=='month'?`<span class="hd">${i+1}</span>${hmEmoHtml(i)}`:`<span>${kind=='week'?+dayAdd(ra,i).slice(8):BLN[i].slice(0,3)}</span><small>${v?short(v):'–'}</small>`,sz=kind=='month'?'aspect-ratio:1;':'height:58px;';
->>>>>>> 758b222fa2e66b1b71939d049c4a9b3d501e7046
    return `<button type="button" class="${cn}" data-i="${i}"${f?' disabled':''} style="${bg}${sz}">${inner}</button>`};
   if(kind=='year')h='<div class="hm4">'+vals.map((_,i)=>cell(i)).join('')+'</div>';
   else{const off=kind=='month'?(new Date(vy,vm,1).getDay()+6)%7:0;h='<div class="hm7">'+['Sen','Sel','Rab','Kam','Jum','Sab','Min'].map(x=>`<div class="hh">${x}</div>`).join('')+'<i></i>'.repeat(off).replace(/<i><\/i>/g,'<div></div>')+vals.map((_,i)=>cell(i)).join('')+'</div>'}
@@ -1182,7 +1163,6 @@ function xcGrid(){const X=S.xc||[],g=ty=>catList(ty).map(n=>`<button type="butto
  $('#xgrid').innerHTML=`<div class="xh">Pengeluaran</div><div class="xw">${g('out')}</div><div class="xh">Pemasukan</div><div class="xw">${g('in')}</div>`}
 function xcUI(){const X=S.xc||[],n=k=>k.slice(k.indexOf(':')+1);$('#xsum').textContent=X.length?X.slice(0,3).map(n).join(', ')+(X.length>3?' +'+(X.length-3):''):'Tidak ada'}
 $('#xgrid').onclick=e=>{const b=e.target.closest('.xcb');if(!b)return;const k=b.dataset.k,X=(S.xc||[]).slice(),i=X.indexOf(k);if(i>=0)X.splice(i,1);else X.push(k);S.xc=X;save();xcGrid();xcUI();report()};
-$('#tgHm').onclick=()=>{S.hmEmo=S.hmEmo===false;save();sets();report()};
 $('#xBtn').onclick=()=>{xcGrid();$('#xPop').classList.add('on')};
 $('#xOk').onclick=()=>$('#xPop').classList.remove('on');
 $('#xClr').onclick=()=>{S.xc=[];save();xcGrid();xcUI();report()};
@@ -1381,11 +1361,7 @@ $('#save').onclick=()=>{const v=val();
  if(nType=='out'||(nType=='in'&&S.th=='vice'))spendFx(v,nType);else{const p=document.createElement('div');p.className='pop';p.textContent=nType=='in'?'💰':'💎';document.body.appendChild(p);setTimeout(()=>p.remove(),1000)}
  if(navigator.vibrate)navigator.vibrate(30);home();report()};
 
-<<<<<<< HEAD
 function sets(){bkUI();$('#stkUrl').value=S.stkUrl||'';$('#tgSug').classList.toggle('on',S.sug!==false);themeUI();syUI();$('#tgP').classList.toggle('on',!!S.pinOn);$('#chgPin').disabled=!S.pinOn;pinDevUI();ctUI();palUI();xcUI();fudUI();$('#nameIn').value=S.name||'';$('#tgR').classList.toggle('on',S.rOn);tyUI();tmUI();$('#rt').value=S.rT}
-=======
-function sets(){bkUI();$('#stkUrl').value=S.stkUrl||'';$('#tgSug').classList.toggle('on',S.sug!==false);themeUI();syUI();$('#tgP').classList.toggle('on',!!S.pinOn);$('#chgPin').disabled=!S.pinOn;pinDevUI();ctUI();palUI();xcUI();$('#tgHm').classList.toggle('on',S.hmEmo!==false);fudUI();$('#nameIn').value=S.name||'';$('#tgR').classList.toggle('on',S.rOn);tyUI();tmUI();$('#rt').value=S.rT}
->>>>>>> 758b222fa2e66b1b71939d049c4a9b3d501e7046
 $('#tgR').onclick=()=>{S.rOn=!S.rOn;save();sets();if(S.rOn&&window.Notification&&Notification.permission=='default')try{Notification.requestPermission()}catch(e){}};
 $('#rt').onchange=e=>{S.rT=e.target.value||'14:00';save()};
 $('#exp').onclick=async()=>{const t='Tanggal,Jenis,Kategori,Jumlah,Catatan\n'+S.tx.map(t=>[t.date,(TYPES[t.type]||TYPES.out)[0],t.cat,t.amt,'"'+t.note+'"'].join(',')).join('\n');try{await navigator.clipboard.writeText(t);toast('📋','Data disalin','Format CSV')}catch(e){toast('⚠️','Tidak bisa menyalin','Gunakan Unduh Excel')}};
