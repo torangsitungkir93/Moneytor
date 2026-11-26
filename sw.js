@@ -1,8 +1,12 @@
-const V='moneytor-v3.0.4',FILES=['./','./index.html','./manifest.json','./icon-180.png','./icon-192.png','./icon-512.png','./favicon.svg','./favicon-48.png'];
+const V='moneytor-v3.0.5',FILES=['./','./index.html','./manifest.json','./icon-180.png','./icon-192.png','./icon-512.png','./favicon.svg','./favicon-48.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V&&x!=='moneytor-cfg').map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
+self.addEventListener('message',e=>{if(e.data==='SKIP_WAITING')self.skipWaiting()});
 self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(u.origin!==location.origin&&!u.hostname.includes('fonts.g'))return;
-e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{if(res.ok&&(res.type==='basic'||u.hostname.includes('fonts.g'))){const cp=res.clone();caches.open(V).then(c=>c.put(e.request,cp))}return res}).catch(()=>caches.match('./index.html'))))});
+ const isDoc=u.origin===location.origin&&(e.request.mode==='navigate'||u.pathname.endsWith('/')||u.pathname.endsWith('/index.html'));
+ if(isDoc){/* HTML: jaringan dulu supaya versi terbaru langsung terbaca; cache hanya untuk offline */
+  e.respondWith(fetch(e.request,{cache:'no-store'}).then(res=>{if(res.ok&&!u.search){const a=res.clone(),b=res.clone();caches.open(V).then(c=>{c.put('./index.html',a);c.put(e.request,b)})}return res}).catch(()=>u.search?Response.error():caches.open(V).then(c=>c.match('./index.html')).then(r=>r||caches.match('./index.html'))));return}
+ e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{if(res.ok&&(res.type==='basic'||u.hostname.includes('fonts.g'))){const cp=res.clone();caches.open(V).then(c=>c.put(e.request,cp))}return res}).catch(()=>caches.match('./index.html'))))});
 
 /* ===== Notifikasi latar belakang ===== */
 self.addEventListener('notificationclick',e=>{e.notification.close();e.waitUntil(self.clients.matchAll({type:'window',includeUncontrolled:true}).then(l=>{for(const c of l){if('focus' in c)return c.focus()}return self.clients.openWindow('./')}))});

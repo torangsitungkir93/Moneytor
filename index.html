@@ -714,7 +714,7 @@ html.pc #kpw,html.pc body.kpopen #sheet .kbar,html.pc body.kpopen #sheet .kp{dis
 <div id="fx" aria-hidden="true"></div>
 <div id="app">
  <section class="view on" id="v-home">
-  <div class="brand"><svg class="bdi" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3 7 9l5 12M15 3l2 6-5 12" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1"/></svg>MoneyTor<button class="bsw" id="bsw" type="button" aria-label="Pilih aplikasi" style="display:none"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><em>v3.0.4</em><span class="sylab" id="sylab"></span><button class="syb off" id="syb" type="button" aria-label="Status sinkron"></button><button class="lkb" id="lkb" type="button" aria-label="Kunci sekarang" title="Kunci sekarang"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button></div><h1 id="hi">Halo 👋</h1>
+  <div class="brand"><svg class="bdi" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3 7 9l5 12M15 3l2 6-5 12" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1"/></svg>MoneyTor<button class="bsw" id="bsw" type="button" aria-label="Pilih aplikasi" style="display:none"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><em>v3.0.5</em><span class="sylab" id="sylab"></span><button class="syb off" id="syb" type="button" aria-label="Status sinkron"></button><button class="lkb" id="lkb" type="button" aria-label="Kunci sekarang" title="Kunci sekarang"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button></div><h1 id="hi">Halo 👋</h1>
   <div class="hero" id="hero"><div class="hsc" id="hsc"><div class="hpg"><button class="hb" id="eye" aria-label="Sembunyikan total saldo"></button><div class="hd" id="hdt"></div><small class="sl">Total Saldo</small><div class="big" id="bal">Rp 0</div>
    <div class="duo" id="duo"><div id="boxIn"><small><i class="ar in">↑</i>Pemasukan bulan ini</small><b id="mi">Rp 0</b></div><div id="boxOut"><small><i class="ar out">↓</i>Pengeluaran bulan ini</small><b id="mo">Rp 0</b></div></div><div class="hd" id="hd"></div></div><div class="hpg hmk" id="btcCard" role="button" tabindex="0" aria-label="Perbarui harga pasar"><div class="mkh"><small>Harga pasar</small><small id="mkTm"></small></div><div class="mkc"><span class="bi">₿</span><span class="bm"><small id="btcS">Bitcoin · via CoinGecko</small><b id="btcP">Rp –</b></span></div><div class="bu"><span id="btcT"></span><em class="mkchip" id="btcC"></em></div><div class="stk" id="stkRow"></div></div></div><div class="hdots" id="hdots"><i class="on"></i><i></i></div></div>
   <div class="tgt" id="tgtCard" style="display:none"><div class="tgh2"><span id="tgtL"></span><b id="tgtP"></b></div><div class="tbar"><i id="tgtF"></i></div><div class="tgs" id="tgtT"></div></div>
@@ -780,7 +780,8 @@ html.pc #kpw,html.pc body.kpopen #sheet .kbar,html.pc body.kpopen #sheet .kp{dis
    <div id="bkList"></div></div>
   <div class="card"><div class="set"><div>Data<small>Tersimpan di perangkat ini</small></div><div style="display:flex;gap:8px"><button class="btn2" id="exp">Salin CSV</button><button class="btn2" id="rst" style="color:var(--out)">Hapus semua</button></div></div></div>
   <p class="hint" style="padding:0 14px;line-height:1.5">Pengingat berbunyi saat aplikasi terbuka pada jam yang dipilih. Notifikasi saat aplikasi tertutup membutuhkan server push.</p>
-  <div class="ver">MoneyTor v3.0.4</div>
+  <div class="card"><div class="lh">Pembaruan aplikasi</div><div class="set"><div>Versi terpasang <b id="updV"></b><small id="updSt" style="max-width:none">Periksa dan terapkan versi terbaru bila ada</small></div><button class="btn2 gold" id="updBtn" type="button" style="flex:none">Periksa pembaruan</button></div></div>
+  <div class="ver">MoneyTor v3.0.5</div>
  </section>
  </div>
 
@@ -1775,6 +1776,26 @@ async function pnCheck(M){const c=S.pn;if(!c||!c.on||!c.as||!c.as.length)return;
   if(v==null||isNaN(v)||!pnHit(v,c.dir,+c.pct))continue;const key=k+':'+(v>0?'u':'d');if(last[key]==td)continue;
   await notify((k=='BTC'?'Bitcoin':k)+(v>0?' naik ':' turun ')+Math.abs(v).toFixed(2).replace('.',',')+'%',p+' · '+(k=='BTC'?'dalam 24 jam':'dari penutupan kemarin'),'pn-'+key);last[key]=td;ch=true}
  if(ch)await pnSaveLast(last)}
+
+/* ===== Periksa & terapkan pembaruan aplikasi ===== */
+let updBusy=0;
+const appVer=()=>{const e=document.querySelector('.brand em');return e?e.textContent.trim():''};
+async function updRun(){if(updBusy)return;updBusy=1;const b=$('#updBtn'),t=$('#updSt');b.disabled=true;t.textContent='Memeriksa pembaruan…';
+ try{
+  const reg=navigator.serviceWorker&&await navigator.serviceWorker.getRegistration();if(reg){try{await reg.update()}catch(e){}}
+  const r=await fetch('index.html?_='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('http '+r.status);const net=await r.text();
+  let cur='';try{const hit=await caches.match('./index.html');if(hit)cur=await hit.text()}catch(e){}
+  const nv=(net.match(/<em>(v[\d.]+)<\/em>/)||[])[1]||'',waiting=!!(reg&&reg.waiting);
+  if(cur&&net===cur&&!waiting){t.textContent='Sudah versi terbaru ('+appVer()+')';toast('✅','Sudah versi terbaru',appVer());return}
+  t.textContent='Memperbarui'+(nv&&nv!=appVer()?' ke '+nv:'')+'…';
+  const ks=await caches.keys();await Promise.all(ks.filter(k=>k!=='moneytor-cfg').map(k=>caches.delete(k)));
+  try{const c=await caches.open('moneytor-fresh'),h={'content-type':'text/html; charset=utf-8'};await c.put(new URL('index.html',location.href).href,new Response(net,{headers:h}));await c.put(new URL('./',location.href).href,new Response(net,{headers:h}))}catch(e){}
+  if(waiting)reg.waiting.postMessage('SKIP_WAITING');
+  setTimeout(()=>location.reload(),600);
+ }catch(e){t.textContent=(navigator.onLine===false||/fetch|network|load failed|http/i.test(String(e&&e.message)))?'Tidak bisa memeriksa, periksa koneksi internet':'Gagal memeriksa pembaruan'}
+ finally{updBusy=0;b.disabled=false}}
+$('#updBtn').onclick=updRun;$('#updV').textContent=appVer();
+
 $('#tgPn').onclick=()=>{const c=pnCfg();c.on=!c.on;S.pn=c;save();pnUI();pnCfgWrite();pnReg(c.on);if(c.on)mktFetch()};
 $('#pnBody').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;const c=pnCfg(),k=b.dataset.k,box=b.parentNode.id;
  if(box=='pnAs'){c.as=c.as.includes(k)?c.as.filter(x=>x!=k):[...c.as,k]}else if(box=='pnDir')c.dir=k;else if(box=='pnPct')c.pct=+k;
