@@ -708,13 +708,20 @@ html.pc #kpw,html.pc body.kpopen #sheet .kbar,html.pc body.kpopen #sheet .kp{dis
 .hdi{flex:none;width:38px;height:38px;border-radius:13px;display:grid;place-items:center;font-size:19px;background:color-mix(in srgb,var(--ink) 6%,transparent)}
 #hdPop .hdn{flex:1;min-width:0}#hdPop .hdn b{display:block;font-size:14.5px}#hdPop .hdn small{display:block;font-size:12px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #hdPop .hdr em{font-style:normal;font-weight:700;font-size:14.5px;white-space:nowrap}
+.setsec{margin:24px 6px 8px;font-size:11.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.pt+.setsec{margin-top:10px}
+@media (hover:none) and (pointer:coarse){html,body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}input,textarea,[contenteditable=true]{-webkit-user-select:text;user-select:text}}
+html.dlock,html.dlock body{overflow:hidden!important;overscroll-behavior:none}
+.dlg{touch-action:none}.dlg .dbox{touch-action:pan-y;overscroll-behavior:contain}.dlg .cmpsc{touch-action:pan-x pan-y}
+.dhb{margin-left:auto;flex:none;width:30px;height:30px;border:0;border-radius:10px;display:grid;place-items:center;padding:0;background:color-mix(in srgb,var(--acc) 14%,transparent);color:var(--acc);cursor:pointer}
+.dhx{gap:8px!important}.dhx b{font-size:18.5px!important}
 </style>
 </head>
 <body>
 <div id="fx" aria-hidden="true"></div>
 <div id="app">
  <section class="view on" id="v-home">
-  <div class="brand"><svg class="bdi" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3 7 9l5 12M15 3l2 6-5 12" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1"/></svg>MoneyTor<button class="bsw" id="bsw" type="button" aria-label="Pilih aplikasi" style="display:none"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><em>v3.0.5</em><span class="sylab" id="sylab"></span><button class="syb off" id="syb" type="button" aria-label="Status sinkron"></button><button class="lkb" id="lkb" type="button" aria-label="Kunci sekarang" title="Kunci sekarang"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button></div><h1 id="hi">Halo 👋</h1>
+  <div class="brand"><svg class="bdi" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3 7 9l5 12M15 3l2 6-5 12" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="1"/></svg>MoneyTor<button class="bsw" id="bsw" type="button" aria-label="Pilih aplikasi" style="display:none"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><em>v3.0.6</em><span class="sylab" id="sylab"></span><button class="syb off" id="syb" type="button" aria-label="Status sinkron"></button><button class="lkb" id="lkb" type="button" aria-label="Kunci sekarang" title="Kunci sekarang"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button></div><h1 id="hi">Halo 👋</h1>
   <div class="hero" id="hero"><div class="hsc" id="hsc"><div class="hpg"><button class="hb" id="eye" aria-label="Sembunyikan total saldo"></button><div class="hd" id="hdt"></div><small class="sl">Total Saldo</small><div class="big" id="bal">Rp 0</div>
    <div class="duo" id="duo"><div id="boxIn"><small><i class="ar in">↑</i>Pemasukan bulan ini</small><b id="mi">Rp 0</b></div><div id="boxOut"><small><i class="ar out">↓</i>Pengeluaran bulan ini</small><b id="mo">Rp 0</b></div></div><div class="hd" id="hd"></div></div><div class="hpg hmk" id="btcCard" role="button" tabindex="0" aria-label="Perbarui harga pasar"><div class="mkh"><small>Harga pasar</small><small id="mkTm"></small></div><div class="mkc"><span class="bi">₿</span><span class="bm"><small id="btcS">Bitcoin · via CoinGecko</small><b id="btcP">Rp –</b></span></div><div class="bu"><span id="btcT"></span><em class="mkchip" id="btcC"></em></div><div class="stk" id="stkRow"></div></div></div><div class="hdots" id="hdots"><i class="on"></i><i></i></div></div>
   <div class="tgt" id="tgtCard" style="display:none"><div class="tgh2"><span id="tgtL"></span><b id="tgtP"></b></div><div class="tbar"><i id="tgtF"></i></div><div class="tgs" id="tgtT"></div></div>
@@ -743,45 +750,39 @@ html.pc #kpw,html.pc body.kpopen #sheet .kbar,html.pc body.kpopen #sheet .kp{dis
 
  <section class="view" id="v-set">
   <div class="pt">Pengaturan</div>
-  <div class="card"><div class="set"><div>MoneyTor Listrik<small>Ganti ke dashboard pemantau pemakaian listrik (kWh) dengan tampilan berbeda. Matikan untuk kembali ke tampilan ini.</small></div><button class="tg" id="tgLk" type="button" aria-label="MoneyTor Listrik"></button></div></div>
+  <div class="setsec">Akun</div>
   <div class="card"><div class="lh">Sinkron antar perangkat</div>
    <div class="set" style="display:block"><div id="syInfo" style="font-size:14.5px;line-height:1.5"></div><div class="bkb" style="padding-bottom:0"><button class="btn2 gold" id="syLogin">Masuk</button><button class="btn2" id="syNow">Sinkron sekarang</button><button class="btn2" id="syOut">Keluar</button></div></div></div>
-  <div class="card">
-   <div class="set"><div>Nama<small>Tampil di sapaan beranda</small></div><input class="nm" id="nameIn" maxlength="40" placeholder="Nama kamu" autocomplete="off"></div>
-   <div class="set" style="display:block"><div>Batas pengeluaran bawaan<small>Diatur per tahun. Dipakai untuk bulan yang tidak punya batas khusus di tahun itu. Peringatan di 80% dan merah di atas 100%. Kosongkan untuk mematikan.</small></div>
+  <div class="card"><div class="lh">Profil</div><div class="set"><div>Nama<small>Tampil di sapaan beranda</small></div><input class="nm" id="nameIn" maxlength="40" placeholder="Nama kamu" autocomplete="off"></div></div>
+  <div class="setsec">Anggaran</div>
+  <div class="card"><div class="lh">Batas pengeluaran</div><div class="set" style="display:block"><div>Batas pengeluaran bawaan<small>Diatur per tahun. Dipakai untuk bulan yang tidak punya batas khusus di tahun itu. Peringatan di 80% dan merah di atas 100%. Kosongkan untuk mematikan.</small></div>
     <div class="mnav" style="margin:10px 0 8px"><button id="tyP" type="button">‹</button><b id="tyL"></b><button id="tyN" type="button">›</button></div>
-    <input class="f" id="tgtIn" inputmode="numeric" placeholder="Rp 0" autocomplete="off" style="margin:0"></div>
-   <div class="set" style="display:block"><div>Batas bulan tertentu<small>Pilih bulannya, lalu isi batasnya. Kosongkan untuk memakai batas bawaan tahun itu, isi 0 untuk mematikan batas di bulan itu. Jika berbeda dari batas bawaan, catatan wajib diisi.</small></div>
+    <input class="f" id="tgtIn" inputmode="numeric" placeholder="Rp 0" autocomplete="off" style="margin:0"></div><div class="set" style="display:block"><div>Batas bulan tertentu<small>Pilih bulannya, lalu isi batasnya. Kosongkan untuk memakai batas bawaan tahun itu, isi 0 untuk mematikan batas di bulan itu. Jika berbeda dari batas bawaan, catatan wajib diisi.</small></div>
     <div class="mnav" style="margin:10px 0 8px"><button id="tmP" type="button">‹</button><b id="tmL"></b><button id="tmN" type="button">›</button></div>
-    <input class="f" id="tmIn" inputmode="numeric" autocomplete="off" style="margin:0"><input class="f" id="tmNote" maxlength="80" placeholder="Catatan wajib (alasan berbeda dari batas bawaan)" autocomplete="off" style="margin:8px 0 0;display:none"><div class="hint" id="tmWarn" style="display:none;color:var(--out);text-align:left;margin-top:6px"></div><div class="hint" id="tmList" style="text-align:left;margin-top:8px"></div></div>
-  </div>
-  <div class="card"><div class="lh">Grafik</div>
-   <div class="set"><div>Kecualikan kategori<small id="xsum">Tidak ada</small></div><button class="btn2" id="xBtn" type="button">Pilih</button></div>
-   <div class="set"><div>Tombol naik/turun<small>Tombol melayang di Laporan untuk lompat ke atas atau bawah</small></div><button class="tg" id="tgFud" type="button"></button></div>
-   <div class="set"><div>Harga pasar<small>Kartu harga BTC dan saham (BBCA, BMRI, BBNI, BBRI) di Beranda. Diperbarui saat sync ditekan atau kartunya diketuk</small></div><button class="tg" id="tgBtc" type="button"></button></div>
-   <div class="set" style="flex-direction:column;align-items:stretch;gap:8px"><div>Sumber harga saham<small style="max-width:none">Alamat Cloudflare Worker (file worker-saham.js). Kosongkan untuk menampilkan BTC saja</small></div><input class="url" id="stkUrl" type="url" inputmode="url" placeholder="https://saham.namamu.workers.dev" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
-   <div class="set" style="display:block"><div>Warna pie chart<small>Pilih palet warna untuk grafik donat di Laporan</small></div><div class="pgrid" id="pgrid"></div></div>
-  </div>
-  <div class="card"><div class="lh">Notifikasi harga</div><div class="set"><div>Beritahu perubahan harga<small id="pnSub">Notifikasi saat harga BTC/saham naik atau turun</small></div><button class="tg" id="tgPn" type="button" aria-label="Notifikasi harga"></button></div><div id="pnBody" style="display:none"><div class="pnl">ASET</div><div class="pnc" id="pnAs"></div><div class="pnl">ARAH</div><div class="pnc" id="pnDir"></div><div class="pnl">BATAS PERUBAHAN</div><div class="pnc" id="pnPct"></div><small style="display:block;margin-top:10px;color:var(--mute);font-size:12px;line-height:1.45">Dicek saat harga diperbarui (sync/ketuk kartu harga), tiap 15 menit selama aplikasi terbuka, dan di latar belakang bila browser mendukung. Persen dihitung seperti di kartu harga: BTC 24 jam, saham dari penutupan kemarin. Maksimal 1 notifikasi per aset per arah per hari.</small></div></div>
+    <input class="f" id="tmIn" inputmode="numeric" autocomplete="off" style="margin:0"><input class="f" id="tmNote" maxlength="80" placeholder="Catatan wajib (alasan berbeda dari batas bawaan)" autocomplete="off" style="margin:8px 0 0;display:none"><div class="hint" id="tmWarn" style="display:none;color:var(--out);text-align:left;margin-top:6px"></div><div class="hint" id="tmList" style="text-align:left;margin-top:8px"></div></div></div>
+  <div class="setsec">Tampilan</div>
   <div class="card"><div class="lh">Tema</div><div class="set" id="autoW"><div>Ganti tema otomatis<small id="autoSub">Berganti tiap 2 jam (00:00, 02:00, …), acak di antara tema favorit ♥</small></div><button class="tg" id="tgAuto" type="button" aria-label="Ganti tema otomatis"></button></div><div id="tgrid"></div></div>
-
-  <div class="card">
-   <div class="set"><div>Saran catatan<small>Tampilkan catatan yang pernah dipakai saat mengetik deskripsi</small></div><button class="tg" id="tgSug"></button></div>
-   <div class="set"><div>Pengingat harian<small>Diingatkan untuk mencatat pengeluaran</small></div><button class="tg" id="tgR"></button></div>
-   <div class="set"><div>Jam pengingat</div><input type="time" id="rt"></div>
-  </div>
-  <div class="card"><div class="set"><div>Kunci dengan PIN<small>PIN 4 angka setiap aplikasi dibuka</small></div><button class="tg" id="tgP"></button></div>
-   <div class="set"><div>Ganti PIN<small>Perlu memasukkan PIN lama</small></div><button class="btn2" id="chgPin">Ganti</button></div>
-   <div class="set" id="pinDevW" style="display:block"><div>PIN berlaku di<small>Pilih perangkat yang meminta PIN</small></div><div class="chips" id="pinDev" style="margin-top:10px"><button class="chip" data-v="all" type="button">Semua</button><button class="chip" data-v="hp" type="button">HP saja</button><button class="chip" data-v="pc" type="button">Laptop saja</button></div></div></div>
+  <div class="card"><div class="lh">Tampilan lainnya</div><div class="set" style="display:block"><div>Warna pie chart<small>Pilih palet warna untuk grafik donat di Laporan</small></div><div class="pgrid" id="pgrid"></div></div><div class="set"><div>Tombol naik/turun<small>Tombol melayang di Laporan untuk lompat ke atas atau bawah</small></div><button class="tg" id="tgFud" type="button"></button></div></div>
+  <div class="setsec">Pencatatan &amp; laporan</div>
+  <div class="card"><div class="lh">Pencatatan</div><div class="set"><div>Saran catatan<small>Tampilkan catatan yang pernah dipakai saat mengetik deskripsi</small></div><button class="tg" id="tgSug"></button></div><div class="set"><div>Pengingat harian<small>Diingatkan untuk mencatat pengeluaran</small></div><button class="tg" id="tgR"></button></div><div class="set"><div>Jam pengingat</div><input type="time" id="rt"></div></div>
+  <p class="hint" style="padding:0 14px;line-height:1.5">Pengingat berbunyi saat aplikasi terbuka pada jam yang dipilih. Notifikasi saat aplikasi tertutup membutuhkan server push.</p>
+  <div class="card"><div class="lh">Laporan</div><div class="set"><div>Kecualikan kategori<small id="xsum">Tidak ada</small></div><button class="btn2" id="xBtn" type="button">Pilih</button></div></div>
+  <div class="setsec">Harga pasar</div>
+  <div class="card"><div class="lh">Harga pasar</div><div class="set"><div>Harga pasar<small>Kartu harga BTC dan saham (BBCA, BMRI, BBNI, BBRI) di Beranda. Diperbarui saat sync ditekan atau kartunya diketuk</small></div><button class="tg" id="tgBtc" type="button"></button></div><div class="set" style="flex-direction:column;align-items:stretch;gap:8px"><div>Sumber harga saham<small style="max-width:none">Alamat Cloudflare Worker (file worker-saham.js). Kosongkan untuk menampilkan BTC saja</small></div><input class="url" id="stkUrl" type="url" inputmode="url" placeholder="https://saham.namamu.workers.dev" autocomplete="off" autocapitalize="off" spellcheck="false"></div></div>
+  <div class="card"><div class="lh">Notifikasi harga</div><div class="set"><div>Beritahu perubahan harga<small id="pnSub">Notifikasi saat harga BTC/saham naik atau turun</small></div><button class="tg" id="tgPn" type="button" aria-label="Notifikasi harga"></button></div><div id="pnBody" style="display:none"><div class="pnl">ASET</div><div class="pnc" id="pnAs"></div><div class="pnl">ARAH</div><div class="pnc" id="pnDir"></div><div class="pnl">BATAS PERUBAHAN</div><div class="pnc" id="pnPct"></div><small style="display:block;margin-top:10px;color:var(--mute);font-size:12px;line-height:1.45">Dicek saat harga diperbarui (sync/ketuk kartu harga), tiap 15 menit selama aplikasi terbuka, dan di latar belakang bila browser mendukung. Persen dihitung seperti di kartu harga: BTC 24 jam, saham dari penutupan kemarin. Maksimal 1 notifikasi per aset per arah per hari.</small></div></div>
+  <div class="setsec">Keamanan</div>
+  <div class="card"><div class="lh">Kunci PIN</div><div class="set"><div>Kunci dengan PIN<small>PIN 4 angka setiap aplikasi dibuka</small></div><button class="tg" id="tgP"></button></div><div class="set"><div>Ganti PIN<small>Perlu memasukkan PIN lama</small></div><button class="btn2" id="chgPin">Ganti</button></div><div class="set" id="pinDevW" style="display:block"><div>PIN berlaku di<small>Pilih perangkat yang meminta PIN</small></div><div class="chips" id="pinDev" style="margin-top:10px"><button class="chip" data-v="all" type="button">Semua</button><button class="chip" data-v="hp" type="button">HP saja</button><button class="chip" data-v="pc" type="button">Laptop saja</button></div></div></div>
+  <div class="setsec">Data</div>
   <div class="card"><div class="lh">Backup &amp; Excel</div>
    <div class="bkx"><div class="bt">Backup penuh<small id="fuInfo"></small></div></div>
    <div class="bkb" style="padding-top:0"><button class="btn2 gold" id="fuNow">Backup sekarang</button><button class="btn2" id="fuShare">Kirim ke WhatsApp</button><button class="btn2" id="fuDl">Unduh Excel</button><button class="btn2" id="fuRes">Pulihkan</button></div>
    <div class="bkx" style="border-top:1px solid var(--line)"><div class="bt">Impor dari Excel<small>Mengganti semua data dengan isi file .xlsx</small></div><label class="btn2" for="fi">Pilih file</label><input type="file" id="fi" accept=".xlsx" hidden></div>
    <div id="bkList"></div></div>
-  <div class="card"><div class="set"><div>Data<small>Tersimpan di perangkat ini</small></div><div style="display:flex;gap:8px"><button class="btn2" id="exp">Salin CSV</button><button class="btn2" id="rst" style="color:var(--out)">Hapus semua</button></div></div></div>
-  <p class="hint" style="padding:0 14px;line-height:1.5">Pengingat berbunyi saat aplikasi terbuka pada jam yang dipilih. Notifikasi saat aplikasi tertutup membutuhkan server push.</p>
+  <div class="card"><div class="lh">Penyimpanan</div><div class="set"><div>Data<small>Tersimpan di perangkat ini</small></div><div style="display:flex;gap:8px"><button class="btn2" id="exp">Salin CSV</button><button class="btn2" id="rst" style="color:var(--out)">Hapus semua</button></div></div></div>
+  <div class="setsec">Aplikasi</div>
+  <div class="card"><div class="lh">MoneyTor Listrik</div><div class="set"><div>MoneyTor Listrik<small>Ganti ke dashboard pemantau pemakaian listrik (kWh) dengan tampilan berbeda. Matikan untuk kembali ke tampilan ini.</small></div><button class="tg" id="tgLk" type="button" aria-label="MoneyTor Listrik"></button></div></div>
   <div class="card"><div class="lh">Pembaruan aplikasi</div><div class="set"><div>Versi terpasang <b id="updV"></b><small id="updSt" style="max-width:none">Periksa dan terapkan versi terbaru bila ada</small></div><button class="btn2 gold" id="updBtn" type="button" style="flex:none">Periksa pembaruan</button></div></div>
-  <div class="ver">MoneyTor v3.0.5</div>
+  <div class="ver">MoneyTor v3.0.6</div>
  </section>
  </div>
 
@@ -958,7 +959,7 @@ function dLabel(d){const t=today();if(d==t)return 'Hari ini';if(d==dayAdd(t,-1))
 function peekH(L,d,cls,tag){return `<div class="peek ${cls}" data-go="${d}"><small>${tag} · ${dLabel(d)}</small>${L.slice(0,2).map(t=>`<div class="pr"><span>${em(t.type,t.cat)} ${esc(t.cat)}</span><em class="${tcls(t)}">${sgn(t)}${rp(t.amt).replace('Rp ','')}</em></div>`).join('')}${L.length>2?`<small style="margin:2px 0 6px">+${L.length-2} transaksi lagi</small>`:''}</div>`}
 let pgG=new Map();
 function pgSec(k){const d=pgDays[k],L=pgG.get(d);let ti=0,to=0;L.forEach(t=>{if(t.type=='in')ti+=t.amt;else if(t.type=='out')to+=t.amt});
- return `${k<pgDays.length-1?peekH(pgG.get(pgDays[k+1]),pgDays[k+1],'up','Hari berikutnya'):''}<div class="dh"><b>${dLabel(d)}</b><span>${ti?'<s class="in">+'+short(ti)+'</s> ':''}${to?'<s class="out">-'+short(to)+'</s>':''}</span></div>${L.map(rowH).join('')}${k>0?peekH(pgG.get(pgDays[k-1]),pgDays[k-1],'dn2','Hari sebelumnya'):''}`}
+ return `${k<pgDays.length-1?peekH(pgG.get(pgDays[k+1]),pgDays[k+1],'up','Hari berikutnya'):''}<div class="dh${d<today()?' dhx':''}"><b>${dLabel(d)}</b><span>${ti?'<s class="in">+'+short(ti)+'</s> ':''}${to?'<s class="out">-'+short(to)+'</s>':''}</span>${d<today()?'<button type="button" class="dhb" aria-label="Kembali ke hari ini" title="Kembali ke hari ini"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3M16 3v3M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM4 9h16"/><circle cx="12" cy="14.5" r="1.7" fill="currentColor" stroke="none"/></svg></button>':''}</div>${L.map(rowH).join('')}${k>0?peekH(pgG.get(pgDays[k-1]),pgDays[k-1],'dn2','Hari sebelumnya'):''}`}
 function pgFill(c){const P=$('#pager'),e=Math.min(pgDays.length-1,c+3);for(let k=Math.max(0,c-3);k<=e;k++){const el=P.children[k];if(el&&!el.dataset.f){el.innerHTML=pgSec(k);el.dataset.f=1}}}
 function pagerR(){const P=$('#pager'),G=new Map();S.tx.forEach(t=>{const a=G.get(t.date);if(a)a.push(t);else G.set(t.date,[t])});pgDays=[...G.keys()].sort();pgG=G;
  if(!pgDays.length){P.style.height='auto';P.innerHTML='<div class="pg"><div class="empty">Belum ada transaksi.<br>Tekan tombol + untuk mulai mencatat.</div></div>';return}
@@ -1325,7 +1326,7 @@ $('#paT').onclick=()=>{S.pah=!S.pah;save();report()};
 $$('#rseg button').forEach(b=>b.onclick=()=>{rType=b.dataset.t;pieDrill=false;$('#rseg').classList.toggle('r',rType=='in');$$('#rseg button').forEach(x=>x.classList.toggle('on',x==b));report()});
 
 function go(v){document.body.classList.toggle('rep-on',v=='rep');if(v=='set'&&typeof xcUI=='function')xcUI();setTimeout(moveInd,0);setTimeout(()=>{if(typeof fudS=='function')fudS()},350);if(v=='bk')bkUI();$$('.view').forEach(e=>e.classList.toggle('on',e.id=='v-'+v));$$('.tab').forEach(t=>t.classList.toggle('on',t.dataset.v==v));scrollTo({top:0});if(v=='rep')report();if(v=='home'){home();if(typeof heroRestore=='function')heroRestore()}}
-let hmT=0;$$('.tab[data-v]').forEach(t=>t.onclick=()=>{if(t.dataset.v=='home'){const n=Date.now(),dbl=n-hmT<400;hmT=n;if(dbl){hmT=0;const td=today();goHomeDay(td);if(!S.tx.some(x=>x.date==td))toast('📅','Belum ada transaksi hari ini','Menampilkan hari terakhir');return}}else hmT=0;go(t.dataset.v)});
+let hmT=0;$$('.tab[data-v]').forEach(t=>t.onclick=()=>{if(t.dataset.v=='home'){const n=Date.now(),dbl=n-hmT<400;hmT=n;if(dbl){hmT=0;goToday();return}}else hmT=0;go(t.dataset.v)});
 
 let kOn=false;
 const val=()=>{const n=parseFloat(($('#amt').value||'').replace(/\./g,'').replace(',','.'))||0;return Math.round(n*(kOn?1000:1))};
@@ -1732,6 +1733,11 @@ $('#sug').onmousedown=e=>e.preventDefault();
 $('#sug').onclick=e=>{const c=e.target.closest('.sgr');if(!c)return;const kb=sugIn;$('#note').value=sugL[+c.dataset.i]||'';sugOff=true;sugIn=false;sugUpd();if(kb){const n=$('#note');n.focus();n.setSelectionRange(n.value.length,n.value.length);sugOff=true;sugUpd()}};
 $('#sug').addEventListener('focusin',()=>{sugIn=true});$('#sug').addEventListener('focusout',e=>{if(!$('#sug').contains(e.relatedTarget)){sugIn=false;setTimeout(sugUpd,0)}});
 $('#tgSug').onclick=()=>{S.sug=S.sug===false;save();sets();sugUpd()};
+function goToday(){const td=today();goHomeDay(td);if(!S.tx.some(x=>x.date==td))toast('📅','Belum ada transaksi hari ini','Menampilkan hari terakhir')}
+$('#pager').addEventListener('click',e=>{const b=e.target.closest('.dhb');if(!b)return;e.stopPropagation();goToday()},true);
+/* ===== kunci scroll halaman selama popup terbuka ===== */
+{const upd=()=>document.documentElement.classList.toggle('dlock',!!document.querySelector('.dlg.on'));const mo=new MutationObserver(upd);$$('.dlg').forEach(d=>mo.observe(d,{attributes:true,attributeFilter:['class']}));upd();
+ document.addEventListener('touchmove',e=>{if(!(document.documentElement.classList.contains('dlock')||document.body.classList.contains('lock')))return;if(e.target.closest&&e.target.closest('.dbox,.sheet,.trl,.cmpsc,#hdL'))return;e.preventDefault()},{passive:false})}
 
 /* ===== Pintasan keyboard PC, navigasi saran, Esc, Ctrl+Enter ===== */
 addEventListener('keydown',e=>{
@@ -1841,6 +1847,11 @@ async function doSync(manual){if(manual)mktFetch();if(!S.sync||!S.sync.rt)return
   const r=await fetch(FSB+'/users/'+uid+':runQuery',{method:'POST',headers:H,body:JSON.stringify(q)});if(!r.ok)throw await fbErr(r);
   const arr=await r.json(),remote={};let maxU=S.sync.last||0,changed=false;
   arr.forEach(x=>{if(!x.document)return;const id=x.document.name.split('/').pop(),o=dec(x.document.fields||{});remote[id]=o;if(o.upd>maxU)maxU=o.upd});
+  let rdel={};{const dr=await fetch(FSB+'/users/'+uid+'/meta/deleted',{headers:H});if(dr.ok){rdel=dec((await dr.json()).fields||{})}else if(dr.status!=404)throw await fbErr(dr)}
+  const delDocs=[];
+  if(!S.sync.tcl){const tr=await fetch(FSB+'/users/'+uid+':runQuery',{method:'POST',headers:H,body:JSON.stringify({structuredQuery:{from:[{collectionId:'tx'}],where:{fieldFilter:{field:{fieldPath:'del'},op:'EQUAL',value:{booleanValue:true}}}}})});if(!tr.ok)throw await fbErr(tr);
+   (await tr.json()).forEach(x=>{if(!x.document)return;const id=x.document.name.split('/').pop(),o=dec(x.document.fields||{}),ts=Number(o.upd)||st;if(/^[A-Za-z0-9_]+$/.test(id)){delDocs.push([id,ts]);rdel['d_'+id]=Math.max(Number(rdel['d_'+id])||0,ts)}})}
+  for(const k in rdel){if(k.slice(0,2)!='d_')continue;const id=k.slice(2),ts=Number(rdel[k])||0;if(!(S.tomb[id]>=ts))S.tomb[id]=ts;const di=S.tx.findIndex(t=>String(t.id)==id);if(di>=0&&(S.tx[di].u||0)<=ts){S.tx.splice(di,1);changed=true}}
   for(const id in remote){const o=remote[id],i=S.tx.findIndex(t=>String(t.id)==id),l=S.tx[i];
    if(o.del){if(l&&(l.u||0)<=o.upd){S.tx.splice(i,1);changed=true}if(!(S.tomb[id]>=o.upd))S.tomb[id]=o.upd}
    else if(!(S.tomb[id]>=o.upd)){const rec={id:isNaN(id)?id:Number(id),type:o.t,cat:o.c,amt:o.a,note:o.n||'',date:o.d,u:o.upd};
@@ -1854,11 +1865,15 @@ async function doSync(manual){if(manual)mktFetch();if(!S.sync||!S.sync.rt)return
   S.merging=0;
   const pa=S.sync.pushedAt||0,W=[],B=FSN+'/users/'+uid;
   S.tx.forEach(t=>{if(t.u>pa&&!(remote[t.id]&&remote[t.id].upd>=t.u))W.push({update:{name:B+'/tx/'+t.id,...enc({t:t.type,c:t.cat,a:t.amt,n:t.note||'',d:t.date,upd:t.u,del:false})}})});
-  for(const id in S.tomb){const ts=S.tomb[id];if(ts>pa&&!(remote[id]&&remote[id].upd>=ts))W.push({update:{name:B+'/tx/'+id,...enc({upd:ts,del:true})}})}
+  const dlog={},dprune=[];
+  for(const id in S.tomb){const ts=S.tomb[id];if(ts>pa&&!(Number(rdel['d_'+id])>=ts)&&!(remote[id]&&!remote[id].del&&remote[id].upd>=ts)){if(/^[A-Za-z0-9_]+$/.test(id)){W.push({delete:B+'/tx/'+id});dlog['d_'+id]=ts}else W.push({update:{name:B+'/tx/'+id,...enc({upd:ts,del:true})}})}}
+  delDocs.forEach(([id,ts])=>{W.push({delete:B+'/tx/'+id});dlog['d_'+id]=ts});
+  {const cut=st-60*864e5;for(const k in rdel){if(k.slice(0,2)=='d_'&&Number(rdel[k])<cut)dprune.push(k)}}
+  if(Object.keys(dlog).length||dprune.length)W.push({update:{name:B+'/meta/deleted',fields:enc(dlog).fields},updateMask:{fieldPaths:[...Object.keys(dlog),...dprune]}});
   const sk=Object.keys(sPush);if(sk.length){const f={};sk.forEach(k=>{f['v_'+k]=JSON.stringify(S[k]);f['ts_'+k]=sPush[k]});W.push({update:{name:B+'/meta/settings',...enc(f)},updateMask:{fieldPaths:Object.keys(f)}})}
   {const L=await lkSyncPart(H,uid,st,pa);L.W.forEach(w=>W.push(w));if(L.ch)changed=true}
   for(let i=0;i<W.length;i+=400){const c=await fetch(FSB+':commit',{method:'POST',headers:H,body:JSON.stringify({writes:W.slice(i,i+400)})});if(!c.ok)throw await fbErr(c)}
-  sk.forEach(k=>S.sf[k]=sPush[k]);lkSyncDone(st);S.sync.fresh=false;S.sync.pushedAt=st;S.sync.last=Math.max(maxU,st);S.sync.at=Date.now();store();syMsg='';
+  sk.forEach(k=>S.sf[k]=sPush[k]);lkSyncDone(st);S.sync.fresh=false;S.sync.pushedAt=st;S.sync.tcl=1;{const cL=st-60*864e5;for(const id in S.tomb)if(S.tomb[id]<cL)delete S.tomb[id]}S.sync.last=Math.max(maxU,st);S.sync.at=Date.now();store();syMsg='';
   if(changed){applyTheme(S.th);greet();home();report();sets();lkAfterSync()}else syUI()
  }catch(e){S.pend=true;S.pendAt=Date.now()-6e5;const m=fbMsg(e);if(/Sesi habis/.test(m)&&S.sync){S.sync.rt='';store()}setSt(m)}
  finally{syncing=false;syUI();if(syncAgain){syncAgain=false;doSync()}}}
